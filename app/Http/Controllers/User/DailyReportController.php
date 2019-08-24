@@ -14,7 +14,7 @@ class DailyReportController extends Controller
      */
     public function index()
     {
-        //
+        return view('user.daily_report.index');
     }
 
     /**
