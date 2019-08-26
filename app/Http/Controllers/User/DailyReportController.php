@@ -21,7 +21,8 @@ class DailyReportController extends Controller
      */
     public function index()
     {
-        return view('user.daily_report.index');
+        $reports = $this->report->all();
+        return view('user.daily_report.index' ,compact('reports'));
     }
 
     /**
