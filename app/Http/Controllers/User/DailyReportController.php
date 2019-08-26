@@ -83,7 +83,12 @@ class DailyReportController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $input = $request->all();
+
+        $this->report->find($id)->fill($input)->save();
         
+        return redirect()->to('report');
+
     }
 
     /**
@@ -94,6 +99,9 @@ class DailyReportController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->report->find($id)->delete();
+
+        return redirect()->to('report');
+        
     }
 }
