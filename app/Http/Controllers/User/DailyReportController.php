@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\DailyReport;
+use Illuminate\Support\Facades\Auth;
 
 class DailyReportController extends Controller
 {
@@ -21,7 +22,7 @@ class DailyReportController extends Controller
      */
     public function index()
     {
-        $reports = $this->report->all();
+        $reports = $this->report->getByUserId(Auth::id());
 
         return view('user.daily_report.index' ,compact('reports'));
     }
@@ -45,8 +46,9 @@ class DailyReportController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        // dd($input);
+
         $this->report->fill($input)->save();
+
         return redirect()->to('report');
     }
 
@@ -59,6 +61,7 @@ class DailyReportController extends Controller
     public function show($id)
     {
         $reports = $this->report->find($id);
+
         return view('user.daily_report.show' ,compact('reports'));
     }
 
@@ -71,6 +74,7 @@ class DailyReportController extends Controller
     public function edit($id)
     {
         $reports = $this->report->find($id);
+
         return view('user.daily_report.edit' ,compact('reports'));
     }
 
@@ -88,7 +92,6 @@ class DailyReportController extends Controller
         $this->report->find($id)->fill($input)->save();
         
         return redirect()->to('report');
-
     }
 
     /**
@@ -102,6 +105,5 @@ class DailyReportController extends Controller
         $this->report->find($id)->delete();
 
         return redirect()->to('report');
-        
     }
 }
