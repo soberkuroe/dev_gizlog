@@ -4,9 +4,16 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\DailyReport;
 
 class DailyReportController extends Controller
 {
+    private $report;
+
+    public function __construct(DailyReport $dailyReport)
+    {
+        $this->report = $dailyReport;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -36,7 +43,8 @@ class DailyReportController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        $this->todo->fill($input)->save();
+        // dd($input);
+        $this->report->fill($input)->save();
         return redirect()->to('report');
     }
 
