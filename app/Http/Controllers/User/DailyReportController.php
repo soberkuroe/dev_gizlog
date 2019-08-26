@@ -22,6 +22,7 @@ class DailyReportController extends Controller
     public function index()
     {
         $reports = $this->report->all();
+
         return view('user.daily_report.index' ,compact('reports'));
     }
 
@@ -82,7 +83,7 @@ class DailyReportController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**
