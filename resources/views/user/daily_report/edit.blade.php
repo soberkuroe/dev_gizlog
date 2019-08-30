@@ -5,7 +5,7 @@
 <div class="main-wrap">
   <div class="container">
     {!! Form::open(['route' => ['report.update', $reports->id], 'method' => 'PUT']) !!}
-      <input class="form-control" name="user_id" type="hidden" value="4">
+      {!! Form::input('hidden', 'user_id', Auth::id(),['class' => 'form-control'] ) !!}
       <div class="form-group form-size-small">
         {!! Form::date('reporting_time', $reports->reporting_time, ['class' => 'form-control']) !!}
       <span class="help-block"></span>
@@ -18,7 +18,7 @@
         {!! Form::textarea('contents', $reports->contents, ['required', 'class' => 'form-control', 'placeholder' =>'Content']) !!}
       <span class="help-block"></span>
       </div>
-      <button type="submit" class="btn btn-success pull-right">Update</button>
+      {!! Form::submit('Update', ['class' => 'btn btn-success pull-right']) !!}
     {!! Form::close() !!}
   </div>
 </div>

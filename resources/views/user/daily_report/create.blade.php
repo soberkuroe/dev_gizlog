@@ -5,7 +5,7 @@
 <div class="main-wrap">
   <div class="container">
   {!! Form::open(['route' => 'report.store']) !!}
-  {!! Form::input('hidden', 'user_id', Auth::id(),['class' => 'form-control'] ) !!}
+    {!! Form::input('hidden', 'user_id', Auth::id(),['class' => 'form-control'] ) !!}
       <div class="form-group form-size-small">
     <input class="form-control" name="reporting_time" type="date">
     <span class="help-block"></span>
