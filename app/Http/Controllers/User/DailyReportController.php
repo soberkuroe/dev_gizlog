@@ -21,9 +21,13 @@ class DailyReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reports = $this->report->getByUserId(Auth::id());
+        if (!empty($request['search-month'])){
+            $reports = $this->report->getMonth($request['search-month']);
+        }else{
+            $reports = $this->report->getByUserId(Auth::id());
+        };
 
         return view('user.daily_report.index' ,compact('reports'));
     }
