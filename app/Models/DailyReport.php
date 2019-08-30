@@ -24,9 +24,9 @@ class DailyReport extends Model
         return $this->where('user_id', $id)->get();
     }
     
-    public function getMonth($request)
+    public function getMonth($request,$id)
     {
-        $reports = $this->where('reporting_time','LIKE',"%{$request}%")->get();
+        $reports = $this->where('reporting_time','LIKE',"%{$request}%")->where('user_id', $id)->get();
 
         return $reports;
     }

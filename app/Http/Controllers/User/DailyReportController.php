@@ -24,7 +24,7 @@ class DailyReportController extends Controller
     public function index(Request $request)
     {
         if (!empty($request['search-month'])){
-            $reports = $this->report->getMonth($request['search-month']);
+            $reports = $this->report->getMonth($request['search-month'],Auth::id());
         }else{
             $reports = $this->report->getByUserId(Auth::id());
         };
