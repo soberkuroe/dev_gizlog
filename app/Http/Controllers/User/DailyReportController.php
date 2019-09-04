@@ -24,12 +24,12 @@ class DailyReportController extends Controller
     public function index(Request $request)
     {
         if (!empty($request['search-month'])){
-            $reports = $this->report->getByMonth($request['search-month'],Auth::id());
+            $reports = $this->report->getByMonth($request['search-month'], Auth::id());
         }else{
             $reports = $this->report->getByUserId(Auth::id());
         };
 
-        return view('user.daily_report.index' ,compact('reports'));
+        return view('user.daily_report.index', compact('reports'));
     }
 
     /**
@@ -67,7 +67,7 @@ class DailyReportController extends Controller
     {
         $reports = $this->report->find($id);
 
-        return view('user.daily_report.show' ,compact('reports'));
+        return view('user.daily_report.show', compact('reports'));
     }
 
     /**
@@ -80,7 +80,7 @@ class DailyReportController extends Controller
     {
         $reports = $this->report->find($id);
 
-        return view('user.daily_report.edit' ,compact('reports'));
+        return view('user.daily_report.edit', compact('reports'));
     }
 
     /**
