@@ -65,9 +65,9 @@ class DailyReportController extends Controller
      */
     public function show($id)
     {
-        $reports = $this->report->find($id);
+        $report = $this->report->find($id);
 
-        return view('user.daily_report.show', compact('reports'));
+        return view('user.daily_report.show', compact('report'));
     }
 
     /**
@@ -78,9 +78,9 @@ class DailyReportController extends Controller
      */
     public function edit($id)
     {
-        $reports = $this->report->find($id);
+        $report = $this->report->find($id);
 
-        return view('user.daily_report.edit', compact('reports'));
+        return view('user.daily_report.edit', compact('report'));
     }
 
     /**
