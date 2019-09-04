@@ -54,7 +54,7 @@ class DailyReportController extends Controller
 
         $this->report->fill($input)->save();
 
-        return redirect()->to('report');
+        return redirect()->route('report.index');
     }
 
     /**
@@ -96,7 +96,7 @@ class DailyReportController extends Controller
 
         $this->report->find($id)->fill($input)->save();
         
-        return redirect()->to('report');
+        return redirect()->route('report.index');
     }
 
     /**
@@ -109,6 +109,6 @@ class DailyReportController extends Controller
     {
         $this->report->find($id)->delete();
 
-        return redirect()->to('report');
+        return redirect()->route('report.index');
     }
 }
