@@ -10,8 +10,6 @@ class DailyReport extends Model
 {
     use SoftDeletes;
     
-    protected $table = 'daily_reports';
-
     protected $fillable = [
         'user_id',
         'reporting_time',
@@ -24,7 +22,7 @@ class DailyReport extends Model
         return $this->where('user_id', $id)->get();
     }
     
-    public function getMonth($request,$id)
+    public function getByMonth($request,$id)
     {
         $reports = $this->where('reporting_time','LIKE',"%{$request}%")->where('user_id', $id)->get();
 
