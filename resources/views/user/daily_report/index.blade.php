@@ -24,8 +24,8 @@
         @foreach ($reports as $report)
           <tr class="row">
             <td class="col-xs-2">{{ $report->reporting_time->format('m/d(D)') }}</td>
-            <td class="col-xs-3">{{ $report->title }}</td>
-            <td class="col-xs-5">{{ $report->contents }}</td>
+            <td class="col-xs-3">{{ str_limit($report->title, 10) }}</td>
+            <td class="col-xs-5">{{ str_limit($report->contents, 20) }}</td>
             <td class="col-xs-2"><a class="btn" href="{{ route('report.show', $report->id) }}"><i class="fa fa-book"></i></a></td>
           </tr>
         @endforeach
