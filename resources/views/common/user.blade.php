@@ -22,6 +22,7 @@
 </head>
 
 <body>
+  <!-- <div id="app"> -->
   <nav class="navbar navbar-default navbar-fixed-top under-shadow">
     <div class="container">
       <div class="navbar-header">
@@ -83,10 +84,12 @@
   </nav>
 
   @yield('content')
+  <!-- </div> -->
 
   <!-- Scripts -->
   <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.0.0/moment.min.js"></script>
   <script src="{{ asset('js/app.js') }}"></script>
   <script src="{{ asset('js/custom.js') }}"></script>
+  
 </body>
 </html>

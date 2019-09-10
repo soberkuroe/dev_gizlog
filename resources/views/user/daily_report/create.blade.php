@@ -5,15 +5,15 @@
 <div class="main-wrap">
   <div class="container">
   {!! Form::open(['route' => 'report.store']) !!}
-      <div class="form-group form-size-small">
+    <div class="form-group form-size-small">
     {!! Form::input('date', 'reporting_time', Carbon::now()->format('Y-m-d'), ['class' => 'form-control']) !!}
     <span class="help-block"></span>
     </div>
-    <div class="form-group">
-      {!! Form::input('text', 'title', null , ['required', 'class' => 'form-control', 'placeholder' =>'Title']) !!}
+    <div class="form-group @if(!empty($errors->first('title'))) has-error @endif">
+      {!! Form::text('title', null , ['required', 'class' => 'form-control', 'placeholder' =>'Title']) !!}
       <span class="help-block">{{ $errors->first('title') }}</span>
     </div>
-    <div class="form-group">
+    <div class="form-group @if(!empty($errors->first('title'))) has-error @endif">
       {!! Form::textarea('contents' , null ,['required', 'class' => 'form-control', 'placeholder' =>'Content']) !!}
       <span class="help-block">{{ $errors->first('contents') }}</span>
     </div>
