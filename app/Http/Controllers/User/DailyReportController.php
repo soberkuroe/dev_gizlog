@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\DailyReport;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\User\DailyReportRequest;
 
 class DailyReportController extends Controller
 {
@@ -48,7 +49,7 @@ class DailyReportController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DailyReportRequest $request)
     {
         $input = $request->all();
 
