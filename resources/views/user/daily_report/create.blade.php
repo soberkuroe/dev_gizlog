@@ -5,7 +5,6 @@
 <div class="main-wrap">
   <div class="container">
   {!! Form::open(['route' => 'report.store']) !!}
-    {!! Form::input('hidden', 'user_id', Auth::id(),['class' => 'form-control'] ) !!}
       <div class="form-group form-size-small">
     {!! Form::input('date', 'reporting_time', Carbon::now()->format('Y-m-d'), ['class' => 'form-control']) !!}
     <span class="help-block"></span>
