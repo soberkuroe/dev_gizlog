@@ -9,13 +9,17 @@
         {!! Form::date('reporting_time', $report->reporting_time, ['class' => 'form-control']) !!}
       <span class="help-block"></span>
       </div>
-      <div class="form-group">
-        {!! Form::input('text', 'title', $report->title, ['required', 'class' => 'form-control', 'placeholder' =>'Title']) !!}
-      <span class="help-block"></span>
+      <div class="form-group @if(!empty($errors->first('title'))) has-error @endif">
+        {!! Form::text('title', $report->title, ['required', 'class' => 'form-control', 'placeholder' =>'Title']) !!}
+      @if ($errors->has('title'))
+      <span class="help-block">{{ $errors->first('title') }}</span>
+      @endif
       </div>
-      <div class="form-group">
+      <div class="form-group @if(!empty($errors->first('contents'))) has-error @endif">
         {!! Form::textarea('contents', $report->contents, ['required', 'class' => 'form-control', 'placeholder' =>'Content']) !!}
-      <span class="help-block"></span>
+      @if ($errors->has('contents'))
+      <span class="help-block">{{ $errors->first('contents') }}</span>
+      @endif
       </div>
       {!! Form::submit('Update', ['class' => 'btn btn-success pull-right']) !!}
     {!! Form::close() !!}

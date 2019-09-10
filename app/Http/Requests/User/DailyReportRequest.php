@@ -24,8 +24,8 @@ class DailyReportRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'    => ['required', 'regex:/^([0-2]|0[0-2])$/'],
-            'contents' => ['required', 'regex:/^([0-2]|0[0-2])$/'],
+            'title'    => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
+            'contents' => ['required', 'regex:/^[a-zA-Z0-9]+$/'],
         ];
     }
   
@@ -34,8 +34,8 @@ class DailyReportRequest extends FormRequest
         return [
             'title.required'    => '入力必須の項目です。',
             'contents.required' => '入力必須の項目です。',
-            'title.regex'       => '半角英数字で入力して下さい。',
-            'contents.regex'    => '半角英数字で入力して下さい。',
+            'title.regex'       => '半角英数字のみ入力可能です。',
+            'contents.regex'    => '半角英数字のみ入力可能です。',
         ];
     }
 }
