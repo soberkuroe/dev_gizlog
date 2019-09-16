@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 
 class DailyReport extends Model
@@ -21,14 +22,15 @@ class DailyReport extends Model
         'reporting_time'
     ];
 
-    public function getByUserId($id)
+    public function getReportList($request)
     {
-        return $this->where('user_id', $id)->get();
-    }
-    
-    public function getByMonth($request,$id)
-    {
-        return $this->where('reporting_time', 'LIKE', $request . '%')->where('user_id', $id)->get();
+        return $this->when($request, function ($query, $request)
+        {
+            return $this->where('reporting_time', 'LIKE', $request . '%')->where('user_id', Auth::id());
+        }, function($query){
+            return $this->where('user_id', Auth::id());
+        })
+        ->orderBy('reporting_time', 'desc')->get();
     }
 
 }
