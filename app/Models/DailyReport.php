@@ -22,13 +22,17 @@ class DailyReport extends Model
         'reporting_time'
     ];
 
-    public function getReportList($request)
+    public function getReportList($getReports)
     {
-        return $this->when($request, function ($query, $request)
+        return $this->when($getReports, function ($query, $getReports)
         {
-            return $this->where('reporting_time', 'LIKE', $request . '%')->where('user_id', Auth::id());
+
+            return $this->where('reporting_time', 'LIKE', $getReports . '%')->where('user_id', Auth::id());
+
         }, function($query){
+            
             return $this->where('user_id', Auth::id());
+
         })
         ->orderBy('reporting_time', 'desc')->get();
     }
