@@ -10,13 +10,13 @@
     <span class="help-block"></span>
     </div>
     <div class="form-group @if(!empty($errors->first('title'))) has-error @endif">
-      {!! Form::text('title', null , ['required', 'class' => 'form-control', 'placeholder' =>'Title']) !!}
+      {!! Form::text('title', null, ['required', 'class' => 'form-control', 'placeholder' =>'Title']) !!}
       @if ($errors->has('title'))
       <span class="help-block">{{ $errors->first('title') }}</span>
       @endif
     </div>
     <div class="form-group @if(!empty($errors->first('contents'))) has-error @endif">
-      {!! Form::textarea('contents' , null ,['required', 'class' => 'form-control', 'placeholder' =>'Content']) !!}
+      {!! Form::textarea('contents', null, ['required', 'class' => 'form-control', 'placeholder' =>'Content']) !!}
       @if ($errors->has('contents'))
       <span class="help-block">{{ $errors->first('contents') }}</span>
       @endif
