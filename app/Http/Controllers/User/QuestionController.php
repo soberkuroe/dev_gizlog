@@ -4,9 +4,19 @@ namespace App\Http\Controllers\User;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Question;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
+    protected $question;
+
+    public function __construct(Question $question)
+    {
+        $this->middleware('auth');
+        $this->question = $question;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,8 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return view('user.question.index');
+        $questions = $this->question->all();
+        return view('user.question.index', compact('questions'));
     }
 
     /**
@@ -24,7 +35,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        //
+        return view('user.question.create');
     }
 
     /**
@@ -35,7 +46,13 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+
+        $input['user_id'] = Auth::id();
+
+        $this->question->fill($input)->save();
+
+        return redirect()->route('question.index');
     }
 
     /**
@@ -81,5 +98,10 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function showMypage()
+    {
+        return view('user.question.mypage');
     }
 }
