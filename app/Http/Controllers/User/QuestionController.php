@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Question;
 use Illuminate\Support\Facades\Auth;
+use DB;
+
 
 class QuestionController extends Controller
 {
@@ -24,7 +26,11 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = $this->question->all();
+        $questions = DB::table('questions')->join('tag_categories', 'tag_categories.id', '=', 'questions.tag_category_id')
+        ->get();
+
+        // $questions = $this->question->all();
+
         return view('user.question.index', compact('questions'));
     }
 
