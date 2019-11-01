@@ -15,5 +15,8 @@ class Question extends Model
         'title',
         'content'
     ];
+    public function tagCategory(){
+        return $this->belongsTo('App\Models\TagCategory');
+    }
 }
 
