@@ -18,13 +18,14 @@
         </tr>
       </thead>
       <tbody>
+        @foreach ($questions as $question)
         <tr class="row">
-          <td class="col-xs-2"></td>
-          <td class="col-xs-1"></td>
-          <td class="col-xs-5"></td>
+          <td class="col-xs-2">{{ $question->created_at->format('Y-m-d') }}</td>
+          <td class="col-xs-1">{{ $question->tagCategory->name }}</td>
+          <td class="col-xs-5">{{ $question->title }}</td>
           <td class="col-xs-2"><span class="point-color"></span></td>
           <td class="col-xs-1">
-            <a class="btn btn-success" href="">
+            <a class="btn btn-success" href="{{ route('question.edit', $question->id) }}">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </a>
           </td>
@@ -36,6 +37,7 @@
             </form>
           </td>
         </tr>
+        @endforeach
       </tbody>
     </table>
   </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Question;
+use App\Models\TagCategory;
 use Illuminate\Support\Facades\Auth;
 use DB;
 
@@ -16,6 +17,7 @@ class QuestionController extends Controller
     public function __construct(Question $question)
     {
         $this->middleware('auth');
+
         $this->question = $question;
     }
 
@@ -26,10 +28,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = DB::table('questions')->join('tag_categories', 'tag_categories.id', '=', 'questions.tag_category_id')
-        ->get();
-
-        // $questions = $this->question->all();
+        $questions = $this->question->all();
 
         return view('user.question.index', compact('questions'));
     }
@@ -69,7 +68,9 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        //
+        $question = $this->question->find($id);
+
+        return view('user.question.show', compact('question'));
     }
 
     /**
@@ -80,7 +81,9 @@ class QuestionController extends Controller
      */
     public function edit($id)
     {
-        //
+        $question = $this->question->find($id);
+
+        return view('user.question.edit', compact('question'));
     }
 
     /**
@@ -108,6 +111,7 @@ class QuestionController extends Controller
 
     public function showMypage()
     {
-        return view('user.question.mypage');
+        $questions = $this->question->all();
+        return view('user.question.mypage', compact('questions'));
     }
 }

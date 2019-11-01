@@ -6,7 +6,7 @@
   <div class="panel panel-success">
     <div class="panel-heading">
       <img src="" class="avatar-img">
-      <p>&nbsp;さんの質問&nbsp;&nbsp;(&nbsp;&nbsp;)</p>
+      <p>&nbsp;さんの質問&nbsp;&nbsp;(&nbsp;&nbsp;{{ $question->tagCategory->name }}&nbsp;&nbsp;)&nbsp;&nbsp;{{ $question->created_at->format('Y-m-d H:i') }}</p>
       <p class="question-date"></p>
     </div>
     <div class="table-responsive">
@@ -14,11 +14,11 @@
         <tbody>
           <tr>
             <th class="table-column">Title</th>
-            <td class="td-text"></td>
+            <td class="td-text">{{ $question->title }}</td>
           </tr>
           <tr>
             <th class="table-column">Question</th>
-            <td class='td-text'></td>
+            <td class='td-text'>{{ $question->content }}</td>
           </tr>
         </tbody>
       </table>
