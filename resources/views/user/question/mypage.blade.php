@@ -30,11 +30,11 @@
             </a>
           </td>
           <td class="col-xs-1">
-            <form>
+            {!! Form::open(['route' => ['question.destroy', $question->id], 'method' => 'DELETE']) !!}
               <button class="btn btn-danger" type="submit">
                 <i class="fa fa-trash-o" aria-hidden="true"></i>
               </button>
-            </form>
+            {!! Form::close() !!}
           </td>
         </tr>
         @endforeach

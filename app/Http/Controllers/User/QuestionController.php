@@ -106,7 +106,9 @@ class QuestionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->question->find($id)->delete();
+        
+        return redirect()->route('question.index');
     }
 
     public function showMypage()
