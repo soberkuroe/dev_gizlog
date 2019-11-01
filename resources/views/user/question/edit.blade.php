@@ -5,7 +5,7 @@
 
 <div class="main-wrap">
   <div class="container">
-    <form>
+    {!! Form::open(['route' => ['question.update', $question->id], 'method' => 'PUT']) !!}
       <div class="form-group">
         <select name='tag_category_id' class = "form-control selectpicker form-size-small" id ="pref_id">
           <option value="">Select category</option>
@@ -24,8 +24,8 @@
         <textarea class="form-control" placeholder="Please write down your question here..." name="content" cols="50" rows="10">{{ $question->content }}</textarea>
         <span class="help-block"></span>
       </div>
-      <input name="confirm" class="btn btn-success pull-right" type="submit" value="update">
-    </form>
+      {!! Form::submit('update', ['name' => 'confirm', 'class' => 'btn btn-success pull-right']) !!}
+    {!! Form::close() !!}
   </div>
 </div>
 
