@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -17,7 +18,8 @@ class DatabaseSeeder extends Seeder
             DailyReportsTableSeeder::class,
             TagCategoriesSeeder::class,
             AttendanceSeeder::class,
-            QuestionsTableSeeder::class
+            QuestionsTableSeeder::class,
+            CommentsTableSeeder::class,
         ]);
     }
 }
