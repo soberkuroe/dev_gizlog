@@ -5,8 +5,8 @@
 <div class="main-wrap">
   <div class="panel panel-success">
     <div class="panel-heading">
-      <img src="" class="avatar-img">
-      <p>&nbsp;さんの質問&nbsp;&nbsp;(&nbsp;&nbsp;{{ $question->tagCategory->name }}&nbsp;&nbsp;)&nbsp;&nbsp;{{ $question->created_at->format('Y-m-d H:i') }}</p>
+      <img src="{{ Auth::user()->avatar }}" class="avatar-img">
+      <p>{{ Auth::user()->name }}&nbsp;さんの質問&nbsp;&nbsp;(&nbsp;&nbsp;{{ $question->tagCategory->name }}&nbsp;&nbsp;)&nbsp;&nbsp;{{ $question->created_at->format('Y-m-d H:i') }}</p>
       <p class="question-date"></p>
     </div>
     <div class="table-responsive">
