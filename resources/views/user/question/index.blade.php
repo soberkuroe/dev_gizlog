@@ -3,7 +3,7 @@
 
 <h2 class="brand-header">質問一覧</h2>
 <div class="main-wrap">
-  <form>
+  {!! Form::open(['route' => 'question.index', 'method' => 'GET']) !!}
     <div class="btn-wrapper">
       <div class="search-box">
         <input class="form-control search-form" placeholder="Search words..." name="search_word" type="text">
@@ -15,14 +15,14 @@
       </a>
     </div>
     <div class="category-wrap">
-      <div class="btn all" id="0">all</div>
-      <div class="btn front" id="1">FRONT</div>
-      <div class="btn back" id="2">BACK</div>
-      <div class="btn infra" id="3">INFRA</div>
-      <div class="btn others" id="4">OTHERS</div>
-      <input id="category-val" name="tag_category_id" type="hidden" value="">
+      {!! Form::submit('all', ['class' => 'btn all', 'id' => '0']) !!}
+      {!! Form::submit('front', ['class' => 'btn front', 'id' => '1']) !!}
+      {!! Form::submit('back', ['class' => 'btn back', 'id' => '2']) !!}
+      {!! Form::submit('infra', ['class' => 'btn infra', 'id' => '3']) !!}
+      {!! Form::submit('others', ['class' => 'btn others', 'id' => '4']) !!}
+      {!! Form::hidden('tag_category_id', '', ['id' => 'category-val']) !!}
     </div>
-  </form>
+  {!! Form::close() !!}
   <div class="content-wrapper table-responsive">
     <table class="table table-striped">
       <thead>
