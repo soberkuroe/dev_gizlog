@@ -45,6 +45,7 @@ Route::group(['prefix' => '/', 'user.', 'namespace' => 'User'], function () {
     Route::get('question/mypage', ['as' => 'question.mypage', 'uses' => 'QuestionController@showMypage']);
     Route::resource('question', QuestionController::class);
 
+    Route::post('comment', ['as' => 'comment.store', 'uses' => 'CommentController@store']);
 });
 
 

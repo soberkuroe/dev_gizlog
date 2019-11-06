@@ -24,20 +24,22 @@
       </table>
     </div>
   </div>
+    @foreach ($comments as $comment)
     <div class="comment-list">
         <div class="comment-wrap">
           <div class="comment-title">
-            <img src="" class="avatar-img">
-            <p></p>
-            <p class="comment-date"></p>
+            <img src="{{ Auth::user()->avatar }}" class="avatar-img">
+            <p>{{ Auth::user()->name }}</p>
+            <p class="comment-date">{{ $comment->created_at }}</p>
           </div>
-          <div class="comment-body"></div>
+          <div class="comment-body">{{ $comment->comment }}</div>
         </div>
     </div>
+    @endforeach
   <div class="comment-box">
-    <form>
-      <input name="user_id" type="hidden" value="">
-      <input name="question_id" type="hidden" value="">
+    {!! Form::open(['route' => 'comment.store', $question->id]) !!}
+      {!! Form::hidden('user_id', '') !!}
+      {!! Form::hidden('question_id', $question->id) !!}
       <div class="comment-title">
         <img src="" class="avatar-img"><p>コメントを投稿する</p>
       </div>
@@ -50,7 +52,7 @@
           <i class="fa fa-pencil" aria-hidden="true"></i>
         </button>
       </div>
-    </form>
+    {!! Form::close() !!}
   </div>
 </div>
 @endsection

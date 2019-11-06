@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Question;
+use App\Models\Comment;
 use App\Models\TagCategory;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -13,12 +14,15 @@ use DB;
 class QuestionController extends Controller
 {
     protected $question;
+    protected $comment;
 
-    public function __construct(Question $question)
+    public function __construct(Question $question, Comment $comment)
     {
         $this->middleware('auth');
 
         $this->question = $question;
+
+        $this->comment = $comment;
     }
 
     /**
@@ -68,9 +72,12 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
+
         $question = $this->question->find($id);
 
-        return view('user.question.show', compact('question'));
+        $comments = $this->comment->where('question_id', '=', $id)->get();
+
+        return view('user.question.show', compact('question', 'comments'));
     }
 
     /**
