@@ -18,7 +18,7 @@ class CommentsTableSeeder extends Seeder
                 'id'          => 1,
                 'user_id'     => 4,
                 'question_id' => 1,
-                'content'     => 'test',
+                'comment'     => 'test',
                 'created_at'  => Carbon::create(2019, 2, 6),
             ],
         ]);
