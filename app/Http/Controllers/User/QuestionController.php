@@ -5,24 +5,19 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Question;
-use App\Models\Comment;
 use App\Models\TagCategory;
 use Illuminate\Support\Facades\Auth;
-use DB;
 
 
 class QuestionController extends Controller
 {
     protected $question;
-    protected $comment;
 
-    public function __construct(Question $question, Comment $comment)
+    public function __construct(Question $question)
     {
         $this->middleware('auth');
 
         $this->question = $question;
-
-        $this->comment = $comment;
     }
 
     /**
@@ -30,10 +25,10 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $questions = $this->question->all();
-
+        $questions = $this->question->fetchQuestion(Auth::id(), $request->all());
+        // dd($request->all());
         return view('user.question.index', compact('questions'));
     }
 
@@ -72,12 +67,9 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-
         $question = $this->question->find($id);
-
-        $comments = $this->comment->where('question_id', '=', $id)->get();
-
-        return view('user.question.show', compact('question', 'comments'));
+        
+        return view('user.question.show', compact('question'));
     }
 
     /**
@@ -89,7 +81,7 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = $this->question->find($id);
-
+        
         return view('user.question.edit', compact('question'));
     }
 
@@ -126,5 +118,11 @@ class QuestionController extends Controller
     {
         $questions = $this->question->all();
         return view('user.question.mypage', compact('questions'));
+    }
+
+    public function confirm(Request $request)
+    {
+        $question = $request->all();
+        return view('user.question.confirm', compact('question'));
     }
 }
