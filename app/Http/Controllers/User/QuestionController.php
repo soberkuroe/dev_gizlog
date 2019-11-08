@@ -16,7 +16,7 @@ class QuestionController extends Controller
     public function __construct(Question $question)
     {
         $this->middleware('auth');
-
+        
         $this->question = $question;
     }
 
@@ -28,7 +28,7 @@ class QuestionController extends Controller
     public function index(Request $request)
     {
         $questions = $this->question->fetchQuestion(Auth::id(), $request->all());
-        // dd($request->all());
+
         return view('user.question.index', compact('questions'));
     }
 
@@ -116,13 +116,15 @@ class QuestionController extends Controller
 
     public function showMypage()
     {
-        $questions = $this->question->all();
+        $questions = $this->question->where('user_id', '=', Auth::id())
+        ->orderBy('created_at', 'desc')->get();
         return view('user.question.mypage', compact('questions'));
     }
 
-    public function confirm(Request $request)
+    public function confirm(Request $request, $id)
     {
         $question = $request->all();
+
         return view('user.question.confirm', compact('question'));
     }
 }

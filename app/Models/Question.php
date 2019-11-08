@@ -32,16 +32,23 @@ class Question extends Model
         return $this->hasMany('App\Models\Comment');
     }
 
-    public function fetchQuestion($userId, $serchWord)
+    public function fetchQuestion($userId, $inputs)
     {
-        if(empty($serchWord))
-        {   
-            return $this->where('user_id', $userId)->get();
-        }else
-        {
-            // return $this->where('title', 'LIKE','%' . $serchWord['search_word'] . '%')
-            //             ->orWhere('tag_category_id', '=', $serchWord['tag_category_id'])
-            //             ->get();
+        return $this->where('user_id', $userId)
+        ->when($inputs, function ($query, $inputs) {
+        return $this->fetchSerchingQuestion($query, $inputs);
+        })
+        ->orderBy('created_at', 'desc')
+        ->get();
+    }
+
+    public function fetchSerchingQuestion($query, $inputs)
+    {
+        if (!empty($inputs['tag_category_id'])) {
+        $query->where('tag_category_id', '=', $inputs);
+        }
+        if (!empty($inputs['search_word'])) {
+        $query->where('title', 'like', '%'.$inputs['search_word'].'%');
         }
     }
 }

@@ -23,13 +23,13 @@
     </div>
   </div>
   <div class="btn-bottom-wrapper">
-    <form>
+    {!! Form::open(['route' => 'question.store']) !!}
       <input name="user_id" type="hidden" value="">
-      <input name="tag_category_id" type="hidden" value="">
-      <input name="title" type="hidden" value="">
-      <input name="content" type="hidden" value="">
+      <input name="tag_category_id" type="hidden" value="{{ $question['tag_category_id'] }}">
+      <input name="title" type="hidden" value="{{ $question['title'] }}">
+      <input name="content" type="hidden" value="{{ $question['content'] }}">
       <button type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
-    </form>
+    {!!  !!}
   </div>
 </div>
 

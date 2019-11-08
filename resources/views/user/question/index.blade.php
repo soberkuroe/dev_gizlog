@@ -3,7 +3,7 @@
 
 <h2 class="brand-header">質問一覧</h2>
 <div class="main-wrap">
-    <!-- {!! Form::open(['route' => 'question.index', 'method' => 'GET']) !!} -->
+    {!! Form::open(['route' => 'question.index', 'method' => 'GET', 'class' => 'category-form']) !!}
     <div class="btn-wrapper">
       <div class="search-box">
         <input class="form-control search-form" placeholder="Search words..." name="search_word" type="text">
@@ -14,9 +14,10 @@
         <i class="fa fa-user" aria-hidden="true"></i>
       </a>
     </div>
+    {!! Form::close() !!}
     {!! Form::open(['route' => 'question.index', 'method' => 'GET', 'class' => 'category-form']) !!}
     <div class="category-wrap">
-      <div class="btn all" id="0">all</div>
+      <div class="btn all" id="">all</div>
       <div class="btn front" id="1">front</div>
       <div class="btn back" id="2">back</div>
       <div class="btn infra" id="3">infra</div>
