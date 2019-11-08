@@ -3,7 +3,7 @@
 
 <h2 class="brand-header">質問一覧</h2>
 <div class="main-wrap">
-  {!! Form::open(['route' => 'question.index', 'method' => 'GET']) !!}
+    <!-- {!! Form::open(['route' => 'question.index', 'method' => 'GET']) !!} -->
     <div class="btn-wrapper">
       <div class="search-box">
         <input class="form-control search-form" placeholder="Search words..." name="search_word" type="text">
@@ -14,15 +14,16 @@
         <i class="fa fa-user" aria-hidden="true"></i>
       </a>
     </div>
+    {!! Form::open(['route' => 'question.index', 'method' => 'GET', 'class' => 'category-form']) !!}
     <div class="category-wrap">
-      {!! Form::submit('all', ['class' => 'btn all', 'id' => '0']) !!}
-      {!! Form::submit('front', ['class' => 'btn front', 'id' => '1']) !!}
-      {!! Form::submit('back', ['class' => 'btn back', 'id' => '2']) !!}
-      {!! Form::submit('infra', ['class' => 'btn infra', 'id' => '3']) !!}
-      {!! Form::submit('others', ['class' => 'btn others', 'id' => '4']) !!}
+      <div class="btn all" id="0">all</div>
+      <div class="btn front" id="1">front</div>
+      <div class="btn back" id="2">back</div>
+      <div class="btn infra" id="3">infra</div>
+      <div class="btn others" id="4">others</div>
       {!! Form::hidden('tag_category_id', '', ['id' => 'category-val']) !!}
     </div>
-  {!! Form::close() !!}
+    {!! Form::close() !!}
   <div class="content-wrapper table-responsive">
     <table class="table table-striped">
       <thead>
