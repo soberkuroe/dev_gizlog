@@ -2,7 +2,7 @@
 @section ('content')
 
 <h2 class="brand-header">
-  <img src="" class="avatar-img">&nbsp;&nbsp;My page
+  <img src="{{ Auth::user()->avatar }}" class="avatar-img">&nbsp;&nbsp;My page
 </h2>
 <div class="main-wrap">
   <div class="content-wrapper table-responsive">
@@ -31,9 +31,7 @@
           </td>
           <td class="col-xs-1">
             {!! Form::open(['route' => ['question.destroy', $question->id], 'method' => 'DELETE']) !!}
-              <button class="btn btn-danger" type="submit">
-                <i class="fa fa-trash-o" aria-hidden="true"></i>
-              </button>
+              {!! Form::button('<i class="fa fa-trash-o" aria-hidden="true"></i>', ['class' => 'btn btn-danger', 'type' => 'submit']) !!}
             {!! Form::close() !!}
           </td>
         </tr>
