@@ -5,8 +5,8 @@ namespace App\Http\Controllers\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Question;
-use App\Models\TagCategory;
 use Illuminate\Support\Facades\Auth;
+use DB;
 
 
 class QuestionController extends Controller
@@ -28,7 +28,7 @@ class QuestionController extends Controller
     public function index(Request $request)
     {
         $questions = $this->question->fetchQuestion(Auth::id(), $request->all());
-
+        // dd(compact('questions'));
         return view('user.question.index', compact('questions'));
     }
 
@@ -121,10 +121,12 @@ class QuestionController extends Controller
         return view('user.question.mypage', compact('questions'));
     }
 
-    public function confirm(Request $request, $id)
+    public function confirm(Request $request)
     {
         $question = $request->all();
 
-        return view('user.question.confirm', compact('question'));
+        $tag_category = DB::table('tag_categories')->where('id', '=', $question['tag_category_id'])->get();
+        
+        return view('user.question.confirm', compact('question', 'tag_category'));
     }
 }

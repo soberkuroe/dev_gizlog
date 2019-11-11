@@ -5,7 +5,7 @@
 <div class="main-wrap">
   <div class="panel panel-success">
     <div class="panel-heading">
-     &nbsp;&nbsp;の質問
+    {{ $tag_category[0]->name }}&nbsp;&nbsp;の質問
     </div>
     <div class="table-responsive">
       <table class="table table-striped table-bordered">
@@ -29,7 +29,7 @@
       <input name="title" type="hidden" value="{{ $question['title'] }}">
       <input name="content" type="hidden" value="{{ $question['content'] }}">
       <button type="submit" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"></i></button>
-    {!!  !!}
+    {!! Form::close() !!}
   </div>
 </div>
 
