@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\User;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Question;
+use Illuminate\Http\Request;
+use App\Http\Requests\User\QuestionsRequest;
 use Illuminate\Support\Facades\Auth;
 use DB;
-
 
 class QuestionController extends Controller
 {
@@ -16,7 +16,6 @@ class QuestionController extends Controller
     public function __construct(Question $question)
     {
         $this->middleware('auth');
-        
         $this->question = $question;
     }
 
@@ -28,7 +27,6 @@ class QuestionController extends Controller
     public function index(Request $request)
     {
         $questions = $this->question->fetchQuestion(Auth::id(), $request->all());
-        // dd(compact('questions'));
         return view('user.question.index', compact('questions'));
     }
 
@@ -48,14 +46,11 @@ class QuestionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(QuestionsRequest $request)
     {
         $input = $request->all();
-
         $input['user_id'] = Auth::id();
-
         $this->question->fill($input)->save();
-
         return redirect()->route('question.index');
     }
 
@@ -68,7 +63,6 @@ class QuestionController extends Controller
     public function show($id)
     {
         $question = $this->question->find($id);
-        
         return view('user.question.show', compact('question'));
     }
 
@@ -92,12 +86,10 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(QuestionsRequest $request, $id)
     {
         $input = $request->all();
-
         $this->question->find($id)->fill($input)->save();
-        
         return redirect()->route('question.index');
     }
 
@@ -116,17 +108,15 @@ class QuestionController extends Controller
 
     public function showMypage()
     {
-        $questions = $this->question->where('user_id', '=', Auth::id())
-        ->orderBy('created_at', 'desc')->get();
+        $questions = $this->question->where('user_id', Auth::id())
+                          ->orderBy('created_at', 'desc')->get();
         return view('user.question.mypage', compact('questions'));
     }
 
-    public function confirm(Request $request)
+    public function confirm(QuestionsRequest $request)
     {
         $question = $request->all();
-
-        $tag_category = DB::table('tag_categories')->where('id', '=', $question['tag_category_id'])->get();
-        
+        $tag_category = DB::table('tag_categories')->where('id', $question['tag_category_id'])->get();
         return view('user.question.confirm', compact('question', 'tag_category'));
     }
 }

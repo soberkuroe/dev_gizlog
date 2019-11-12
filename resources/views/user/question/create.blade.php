@@ -5,7 +5,7 @@
 <div class="main-wrap">
   <div class="container">
     {!! Form::open(['route' => 'question.confirm']) !!}
-      <div class="form-group">
+      <div class="form-group @if(!empty($errors->first('tag_category_id'))) has-error @endif">
         {!! Form::select('tag_category_id', [
           ''  => 'Select category',
           '1' => 'front',
@@ -13,15 +13,21 @@
           '3' => 'infra',
           '4' => 'others'
           ], 'null', ['class' => 'form-control selectpicker form-size-small', 'id' => 'pref_id'] ) !!}
-        <span class="help-block"></span>
+        @if($errors->has('tag_category_id'))
+        <span class="help-block">{{ $errors->first('tag_category_id') }}</span>
+        @endif
       </div>
-      <div class="form-group">
+      <div class="form-group @if(!empty($errors->first('title'))) has-error @endif">
         {!! Form::text('title', null, ['class' => 'form-control', 'placeholder' => 'title']) !!}
-        <span class="help-block"></span>
+        @if($errors->has('title'))
+        <span class="help-block">{{ $errors->first('title') }}</span>
+        @endif
       </div>
-      <div class="form-group">
+      <div class="form-group @if(!empty($errors->first('content'))) has-error @endif">
         {!! Form::textarea('content', null, ['class' => 'form-control', 'placeholder' => 'Please write down your question here...']) !!}
-        <span class="help-block"></span>
+        @if($errors->has('content'))
+        <span class="help-block">{{ $errors->first('content') }}</span>
+        @endif
       </div>
       {!! Form::submit('create', ['name' =>'confirm', 'class' => 'btn btn-success pull-right']) !!}
     {!! Form::close() !!}
