@@ -109,7 +109,7 @@ class QuestionController extends Controller
     public function showMypage()
     {
         $questions = $this->question->where('user_id', Auth::id())
-                          ->orderBy('created_at', 'desc')->get();
+                          ->orderBy('created_at', 'desc')->paginate(10);
         return view('user.question.mypage', compact('questions'));
     }
 
