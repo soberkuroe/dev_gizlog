@@ -5,6 +5,9 @@
 <div class="main-wrap">
     {!! Form::open(['route' => 'question.index', 'method' => 'GET', 'class' => 'category-form']) !!}
     <div class="btn-wrapper">
+        @if($errors->has('search_word'))
+        {{ $errors->first('search_word') }}
+        @endif
       <div class="search-box">
         {!! Form::text('search_word', null, ['class' => 'form-control search-form', 'placeholder' => 'Search words...']) !!}
         <button type="submit" class="search-icon"><i class="fa fa-search" aria-hidden="true"></i></button>

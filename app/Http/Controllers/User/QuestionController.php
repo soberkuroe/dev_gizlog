@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Question;
-use Illuminate\Http\Request;
+use App\Http\Requests\User\SerchQuestionsRequest;
 use App\Http\Requests\User\QuestionsRequest;
 use Illuminate\Support\Facades\Auth;
 use DB;
@@ -24,7 +24,7 @@ class QuestionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(SerchQuestionsRequest $request)
     {
         $questions = $this->question->fetchQuestion(Auth::id(), $request->all());
         return view('user.question.index', compact('questions'));
