@@ -4,6 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Question;
+use App\Models\TagCategory;
 use App\Http\Requests\User\SerchQuestionsRequest;
 use App\Http\Requests\User\QuestionsRequest;
 use Illuminate\Support\Facades\Auth;
@@ -12,11 +13,13 @@ use DB;
 class QuestionController extends Controller
 {
     protected $question;
+    protected $tagCategory;
 
-    public function __construct(Question $question)
+    public function __construct(Question $question, TagCategory $tagCategory)
     {
         $this->middleware('auth');
         $this->question = $question;
+        $this->tagCategory = $tagCategory;
     }
 
     /**
@@ -116,7 +119,7 @@ class QuestionController extends Controller
     public function confirm(QuestionsRequest $request)
     {
         $question = $request->all();
-        $tag_category = DB::table('tag_categories')->where('id', $question['tag_category_id'])->get();
+        $tag_category = $this->tagCategory->where('id', $question['tag_category_id'])->get();
         return view('user.question.confirm', compact('question', 'tag_category'));
     }
 }
