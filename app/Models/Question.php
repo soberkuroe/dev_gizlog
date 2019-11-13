@@ -49,4 +49,14 @@ class Question extends Model
             $query->where('title', 'like', '%'.$inputs['search_word'].'%');
         }
     }
+
+    // public function fetchSerchingQuestion($query, $inputs)
+    // {
+    //     switch($inputs) {
+    //         case !empty($inputs['tag_category_id']):
+    //             return $query->where('tag_category_id', $inputs);
+    //         case !empty($inputs['search_word']);
+    //             return $query->where('title', 'like', '%'.$inputs['search_word'].'%');
+    //     }
+    // }
 }
