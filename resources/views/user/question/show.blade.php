@@ -45,7 +45,10 @@
       </div>
       <div class="comment-body">
         {!! Form::textarea('comment', null, ['class' => 'form-control', 'placeholder' => 'Add your comment...']) !!}
-        <span class="help-block"></span>
+        @if($errors->has('comment'))
+        <span class="help-block">{{ $errors->first('comment') }}</span>
+        @endif
+        </div>
       </div>
       <div class="comment-bottom">
         {!! Form::button('<i class="fa fa-pencil" aria-hidden="true"></i>', ['type' => 'submit', 'class' => 'btn btn-success']) !!}

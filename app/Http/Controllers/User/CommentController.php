@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\User\CommentRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Auth;
@@ -24,7 +24,7 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
         $input = $request->all();
 
