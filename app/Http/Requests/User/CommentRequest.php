@@ -24,7 +24,7 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => 'required|max:250|regex:/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。\n\r]+$/u' 
+            'comment' => 'required|max:250|regex:/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。\n\r ]+$/u' 
         ];
     }
 
@@ -33,7 +33,7 @@ class CommentRequest extends FormRequest
         return [
             'comment.required' => '入力必須の項目です。',
             'comment.max'      => '250文字以内で入力してください',
-            'comment.regex'    => '空白や、。以外の記号は入力できません',
+            'comment.regex'    => '全角スペースや、。以外の記号は入力できません',
         ];
     }
 }

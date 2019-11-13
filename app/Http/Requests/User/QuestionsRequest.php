@@ -25,8 +25,8 @@ class QuestionsRequest extends FormRequest
     {
         return [
             'tag_category_id' => 'required|integer|between:1,4',
-            'title'           => 'required|max:30|regex:/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。\n\r]+$/u',
-            'content'         => 'required|max:250|regex:/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。\n\r]+$/u'
+            'title'           => 'required|max:30|regex:/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。\n\r ]+$/u',
+            'content'         => 'required|max:250|regex:/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。\n\r ]+$/u'
         ];
     }
 
@@ -38,10 +38,10 @@ class QuestionsRequest extends FormRequest
             'tag_category_id.between'  => 'tag_category_idは変更できません',
             'title.required'           => '入力必須の項目です',
             'title.max'                => '30文字以内で入力してください',
-            'title.regex'              => '空白や、。以外の記号は入力できません',
+            'title.regex'              => '全角スペースや、。以外の記号は入力できません',
             'content.required'         => '入力必須の項目です',
             'content.max'              => '250文字以内で入力してください',
-            'content.regex'            => '空白や、。以外の記号は入力できません',
+            'content.regex'            => '全角スペースや、。以外の記号は入力できません',
         ];
     }
 }
