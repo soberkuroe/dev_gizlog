@@ -8,7 +8,6 @@ use App\Models\TagCategory;
 use App\Http\Requests\User\SerchQuestionsRequest;
 use App\Http\Requests\User\QuestionsRequest;
 use Illuminate\Support\Facades\Auth;
-use DB;
 
 class QuestionController extends Controller
 {
@@ -78,7 +77,6 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = $this->question->find($id);
-        
         return view('user.question.edit', compact('question'));
     }
 
@@ -105,7 +103,6 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         $this->question->find($id)->delete();
-        
         return redirect()->route('question.index');
     }
 

@@ -14,7 +14,6 @@ class CommentController extends Controller
     public function __construct(Comment $comment)
     {
         $this->middleware('auth');
-
         $this->comment = $comment;
     }
 
@@ -27,11 +26,8 @@ class CommentController extends Controller
     public function store(CommentRequest $request)
     {
         $input = $request->all();
-
         $input['user_id'] = Auth::id();
-
         $this->comment->fill($input)->save();
-
         return redirect()->route('question.index');
     }
 }

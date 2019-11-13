@@ -14,6 +14,7 @@ class Comment extends Model
         'question_id',
         'comment'
     ];
+    
     public function question()
     {
         return $this->belongsTo('App\Models\Question');
