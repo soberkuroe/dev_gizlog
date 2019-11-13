@@ -13,14 +13,7 @@ class CommentsTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->truncate();
-        DB::table('comments')->insert([
-            [
-                'id'          => 1,
-                'user_id'     => 4,
-                'question_id' => 1,
-                'comment'     => 'test',
-                'created_at'  => Carbon::create(2019, 2, 6),
-            ],
-        ]);
+
+        factory(App\Models\Comment::class, 30)->create();
     }
 }
