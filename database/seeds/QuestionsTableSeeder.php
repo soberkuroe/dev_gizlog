@@ -14,6 +14,6 @@ class QuestionsTableSeeder extends Seeder
     {
         DB::table('questions')->truncate();
 
-        factory(App\Models\Question::class, 30)->create();
+        factory(App\Models\Question::class, 100)->create();
     }
 }
