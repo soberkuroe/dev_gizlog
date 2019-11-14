@@ -15,9 +15,9 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Comment::class, function (Faker $faker) {
     return [
-        'user_id' => $faker->numberBetween($min = 1, $max = 10),
-        'question_id' => $faker->numberBetween($min = 1, $max = 100),
-        'comment' => $faker->realText($faker->numberBetween($min =10, $max =30)),
-        'created_at' => $faker->datetime($max = 'now', $timezone = date_default_timezone_get()),
+        'user_id' => $faker->numberBetween(1, 0),
+        'question_id' => $faker->numberBetween(1, 100),
+        'comment' => $faker->realText($faker->numberBetween(10, 30)),
+        'created_at' => $faker->datetime('now', date_default_timezone_get()),
     ];
 });

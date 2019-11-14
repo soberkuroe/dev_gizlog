@@ -15,10 +15,10 @@ use Faker\Generator as Faker;
 
 $factory->define(App\Models\Question::class, function (Faker $faker) {
     return [
-        'user_id' => $faker->numberBetween($min = 1, $max = 10),
-        'tag_category_id' => $faker->numberBetween($min = 1, $max = 4),
-        'title' => $faker->realText($faker->numberBetween($min =10, $max =15)),
-        'content' => $faker->realText($faker->numberBetween($min =10, $max =30)),
-        'created_at' => $faker->datetime($max = 'now', $timezone = date_default_timezone_get()),
+        'user_id' => $faker->numberBetween(1, 10),
+        'tag_category_id' => $faker->numberBetween(1, 4),
+        'title' => $faker->realText($faker->numberBetween(10, 15)),
+        'content' => $faker->realText($faker->numberBetween(10, 30)),
+        'created_at' => $faker->datetime('now', date_default_timezone_get()),
     ];
 });
