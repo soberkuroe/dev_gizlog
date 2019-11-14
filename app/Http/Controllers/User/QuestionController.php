@@ -30,7 +30,8 @@ class QuestionController extends Controller
     public function index(SerchQuestionsRequest $request)
     {
         $questions = $this->question->fetchQuestion(Auth::id(), $request->all());
-        return view('user.question.index', compact('questions'));
+        $tag_category = $this->tagCategory->all();
+        return view('user.question.index', compact('questions', 'tag_category'));
     }
 
     /**
@@ -40,7 +41,8 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        return view('user.question.create');
+        $tag_category = $this->tagCategory->all();
+        return view('user.question.create', compact('tag_category'));
     }
 
     /**
@@ -78,7 +80,8 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = $this->question->find($id);
-        return view('user.question.edit', compact('question'));
+        $tag_category = $this->tagCategory->all();
+        return view('user.question.edit', compact('question', 'tag_category'));
     }
 
     /**
