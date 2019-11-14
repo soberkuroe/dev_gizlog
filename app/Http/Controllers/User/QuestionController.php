@@ -24,6 +24,7 @@ class QuestionController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param \Illuminate\Foundation\Http\FormRequest $request
      * @return \Illuminate\Http\Response
      */
     public function index(SerchQuestionsRequest $request)
@@ -45,7 +46,7 @@ class QuestionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(QuestionsRequest $request)
@@ -83,7 +84,7 @@ class QuestionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -106,6 +107,11 @@ class QuestionController extends Controller
         return redirect()->route('question.index');
     }
 
+    /**
+     * Display mypage.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function showMypage()
     {
         $questions = $this->question->where('user_id', Auth::id())
@@ -113,6 +119,12 @@ class QuestionController extends Controller
         return view('user.question.mypage', compact('questions'));
     }
 
+    /**
+     * Display confirmation page.
+     *
+     * @param  \Illuminate\Foundation\Http\FormRequest  $request
+     * @return \Illuminate\Http\Response
+     */
     public function confirm(QuestionsRequest $request)
     {
         $question = $request->all();
