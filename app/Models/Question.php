@@ -34,19 +34,21 @@ class Question extends Model
     public function fetchQuestion($userId, $inputs)
     {
         return $this->where('user_id', $userId)
-                    ->when($inputs, function ($query, $inputs) {
-        return $this->fetchSerchingQuestion($query, $inputs);
-        })          ->orderBy('created_at', 'desc')
-                    ->paginate(10);
+            ->when(!empty($inputs), function ($query) use ($inputs) {
+                return $query->fetchSerchingQuestion($inputs);
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
     }
 
-    public function fetchSerchingQuestion($query, $inputs)
+    public function scopeFetchSerchingQuestion($query, $inputs)
     {
-        switch($inputs) {
-            case !empty($inputs['tag_category_id']):
-                return $query->where('tag_category_id', $inputs);
-            case !empty($inputs['search_word']);
-                return $query->where('title', 'like', '%'.$inputs['search_word'].'%');
+        if (!empty($inputs['tag_category_id'])) {
+            $query->where('tag_category_id', $inputs);
         }
+        if (!empty($inputs['search_word'])) {
+            $query->where('title', 'like', '%'.$inputs['search_word'].'%');
+        }
+        return $query;
     }
 }
