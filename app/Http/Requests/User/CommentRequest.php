@@ -24,13 +24,20 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => 'required|max:250|regex:/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。\n\r ]+$/u' 
+            'comment' => 'required|max:250' 
         ];
     }
 
     public function messages()
     {
         return [];
+    }
+
+    protected function validationData()
+    {
+        $input = $this->all();
+        $input['comment'] = mb_convert_kana($input['comment'], 's');
+        return $input;
     }
 }
 
