@@ -30,11 +30,7 @@ class CommentRequest extends FormRequest
 
     public function messages()
     {
-        return [
-            'comment.required' => '入力必須の項目です。',
-            'comment.max'      => '250文字以内で入力してください',
-            'comment.regex'    => '全角スペースや、。以外の記号は入力できません',
-        ];
+        return [];
     }
 }
 

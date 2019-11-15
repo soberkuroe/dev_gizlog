@@ -24,15 +24,12 @@ class SerchQuestionsRequest extends FormRequest
     public function rules()
     {
         return [
-            'search_word' => 'max:10|regex:/^[ぁ-んァ-ヶーa-zA-Z0-9一-龠０-９、。\n\r ]+$/u',
+            'search_word' => 'max:10',
         ];
     }
 
     public function messages()
     {
-        return [
-            'search_word.max'   => '10文字以内で入力してください',
-            'search_word.regex' => '全角スペースや、。以外の記号は入力できません',
-        ];
+        return [];
     }
 }
