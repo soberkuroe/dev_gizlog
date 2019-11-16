@@ -22,7 +22,8 @@ class QuestionController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * index画面の表示
+     * requestがあった場合は検索を実行しLengthAwarePaginatorインスタンスを返す
      *
      * @param \Illuminate\Foundation\Http\FormRequest $request
      * @return \Illuminate\Http\Response
@@ -35,7 +36,8 @@ class QuestionController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 新規投稿画面へ遷移
+     * tagCategoryモデルを取得し、viewへ渡しています
      *
      * @return \Illuminate\Http\Response
      */
@@ -46,7 +48,8 @@ class QuestionController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * questionsテーブルへ新規レコードの登録
+     * 登録後indexへリダイレクト
      *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @return \Illuminate\Http\Response
@@ -60,7 +63,7 @@ class QuestionController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * 質問詳細画面へ遷移
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -72,7 +75,7 @@ class QuestionController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 質問編集画面へ遷移
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -85,7 +88,8 @@ class QuestionController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * 指定のレコードを更新
+     * 更新後indexへリダイレクト
      *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @param  int  $id
@@ -99,7 +103,8 @@ class QuestionController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * 指定のレコードへ論理削除を実行
+     * 削除後はindexへリダイレクト
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -111,27 +116,47 @@ class QuestionController extends Controller
     }
 
     /**
-     * Display mypage.
+     * マイページ画面へ遷移
      *
      * @return \Illuminate\Http\Response
      */
     public function showMypage()
     {
-        $questions = $this->question->where('user_id', Auth::id())
-                          ->orderBy('created_at', 'desc')->paginate(10);
+        $questions = $this->question
+            ->where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
         return view('user.question.mypage', compact('questions'));
     }
 
     /**
-     * Display confirmation page.
+     * 新規投稿内容の確認画面へ遷移
      *
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function confirm(QuestionsRequest $request)
+    public function createConfirm(QuestionsRequest $request)
     {
         $question = $request->all();
-        $tag_category = $this->tagCategory->where('id', $question['tag_category_id'])->get();
-        return view('user.question.confirm', compact('question', 'tag_category'));
+        $tag_category = $this->tagCategory
+            ->where('id', $question['tag_category_id'])
+            ->get();
+        return view('user.question.createconfirm', compact('question', 'tag_category'));
+    }
+
+    /**
+     * 更新投稿内容の確認画面へ遷移
+     *
+     * @param  \Illuminate\Foundation\Http\FormRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateConfirm(QuestionsRequest $request, $id)
+    {   
+        $updateId = $id;
+        $question = $request->all();
+        $tag_category = $this->tagCategory
+            ->where('id', $question['tag_category_id'])
+            ->get();
+        return view('user.question.updateconfirm', compact('question', 'tag_category', 'updateId'));
     }
 }
