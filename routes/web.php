@@ -42,7 +42,8 @@ Route::group(['prefix' => '/', 'user.', 'namespace' => 'User'], function () {
 
     Route::resource('report', DailyReportController::class);
 
-    Route::post('question/create/confirm', ['as' => 'question.confirm', 'uses' => 'QuestionController@confirm']);
+    Route::post('question/create/createconfirm', ['as' => 'question.create.confirm', 'uses' => 'QuestionController@createConfirm']);
+    Route::post('question/create/updateconfirm/{question}', ['as' => 'question.update.confirm', 'uses' => 'QuestionController@updateConfirm']);
     Route::get('question/mypage', ['as' => 'question.mypage', 'uses' => 'QuestionController@showMypage']);
     Route::resource('question', QuestionController::class);
 
