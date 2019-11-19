@@ -33,7 +33,7 @@ class Question extends Model
 
     public function fetchQuestion($userId, $inputs)
     {
-        return $this->where('user_id', $userId)
+        return $this->filterUser($userId)
             ->when(!empty($inputs), function ($query) use ($inputs) {
                 return $query->fetchSerchingQuestion($inputs);
             })
@@ -44,11 +44,33 @@ class Question extends Model
     public function scopeFetchSerchingQuestion($query, $inputs)
     {
         if (!empty($inputs['tag_category_id'])) {
-            $query->where('tag_category_id', $inputs);
+            $query->serchCategory($inputs);
         }
         if (!empty($inputs['search_word'])) {
-            $query->where('title', 'like', '%'.$inputs['search_word'].'%');
+            $query->SerchWord($inputs);
         }
         return $query;
+    }
+
+    public function scopeFetchUserQuestion($query, $userId)
+    {
+        return $query->filterUser($userId)
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+    }
+
+    public function scopeFilterUser($query, $userId)
+    {
+        return $query->where('user_id', $userId);
+    }
+
+    public function scopeSerchCategory($query, $inputs)
+    {
+        return $query->where('tag_category_id', $inputs);
+    }
+
+    public function scopeSerchWord($query, $inputs)
+    {
+        return $query->where('title', 'like', '%'.$inputs['search_word'].'%');
     }
 }
