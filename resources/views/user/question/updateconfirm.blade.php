@@ -23,7 +23,7 @@
     </div>
   </div>
   <div class="btn-bottom-wrapper">
-    {!! Form::open(['route' => ['question.update', $updateId], 'method' => 'PUT']) !!}
+    {!! Form::open(['route' => ['question.update', $sendQuestionId], 'method' => 'PUT']) !!}
       {!! Form::hidden('tag_category_id', $question['tag_category_id']) !!}
       {!! Form::hidden('title', $question['title']) !!}
       {!! Form::hidden('content', $question['content']) !!}

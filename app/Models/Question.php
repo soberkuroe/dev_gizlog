@@ -31,30 +31,19 @@ class Question extends Model
         return $this->hasMany('App\Models\Comment');
     }
 
-
-    public function fetchQuestion($userId, $inputs)
+    public function fetchAuthUserQuestion($userId)
     {
-        if (empty($inputs)) {
-            return $this->fetchUserQuestion($userId);
-        } else {
-            return $this->filterUser($userId)
-                ->filterCategory($inputs)
-                ->filterWord($inputs)
-                ->orderBy('created_at', 'desc')
-                ->paginate(10);
-        }
+        return $this->where('user_id', $userId)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10);
     }
 
-    public function scopeFetchUserQuestion($query, $userId)
+    public function fetchQuestion($inputs)
     {
-        return $query->filterUser($userId)
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
-    }
-
-    public function scopeFilterUser($query, $userId)
-    {
-        return $query->where('user_id', $userId);
+        return $this->filterCategory($inputs)
+                    ->filterWord($inputs)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(10);
     }
 
     public function scopeFilterCategory($query, $inputs)
@@ -68,7 +57,7 @@ class Question extends Model
     public function scopeFilterWord($query, $inputs)
     {
         if (!empty($inputs['search_word'])) {
-            $query->where('title', 'like', '%'.$inputs['search_word'].'%');
+            return $query->where('title', 'like', '%'.$inputs['search_word'].'%');
         }
         return $query;
     }

@@ -30,7 +30,7 @@ class QuestionController extends Controller
      */
     public function index(SerchQuestionsRequest $request)
     {
-        $questions = $this->question->fetchQuestion(Auth::id(), $request->all());
+        $questions = $this->question->fetchQuestion($request->all());
         $tagCategories = $this->tagCategory->fetchAllCategories();
         return view('user.question.index', compact('questions', 'tagCategories'));
     }
@@ -44,8 +44,8 @@ class QuestionController extends Controller
     public function create()
     {
         $tagCategories = $this->tagCategory
-            ->fetchAllCategories()
-            ->prepend('Select category', '');
+                              ->fetchAllCategories()
+                              ->prepend('Select category', '');
         return view('user.question.create', compact('tagCategories'));
     }
 
@@ -86,8 +86,8 @@ class QuestionController extends Controller
     {
         $question = $this->question->find($id);
         $tagCategories = $this->tagCategory
-            ->fetchAllCategories()
-            ->prepend('Select category', '');
+                              ->fetchAllCategories()
+                              ->prepend('Select category', '');
         return view('user.question.edit', compact('question', 'tagCategories'));
     }
 
@@ -126,7 +126,7 @@ class QuestionController extends Controller
      */
     public function showMypage()
     {
-        $questions = $this->question->fetchUserQuestion(Auth::id());
+        $questions = $this->question->fetchAuthUserQuestion(Auth::id());
         return view('user.question.mypage', compact('questions'));
     }
 
@@ -149,10 +149,10 @@ class QuestionController extends Controller
      * @param  \Illuminate\Foundation\Http\FormRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function updateConfirm(QuestionsRequest $request, $updateId)
+    public function updateConfirm(QuestionsRequest $request, $sendQuestionId)
     {   
         $question = $request->all();
         $tagCategory = $this->tagCategory->fetchCategory($question);
-        return view('user.question.updateconfirm', compact('question', 'tagCategory', 'updateId'));
+        return view('user.question.updateconfirm', compact('question', 'tagCategory', 'sendQuestionId'));
     }
 }
