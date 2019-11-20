@@ -31,25 +31,18 @@ class Question extends Model
         return $this->hasMany('App\Models\Comment');
     }
 
+
     public function fetchQuestion($userId, $inputs)
     {
-        return $this->filterUser($userId)
-            ->when(!empty($inputs), function ($query) use ($inputs) {
-                return $query->fetchSerchingQuestion($inputs);
-            })
-            ->orderBy('created_at', 'desc')
-            ->paginate(10);
-    }
-
-    public function scopeFetchSerchingQuestion($query, $inputs)
-    {
-        if (!empty($inputs['tag_category_id'])) {
-            $query->serchCategory($inputs);
+        if (empty($inputs)) {
+            return $this->fetchUserQuestion($userId);
+        } else {
+            return $this->filterUser($userId)
+                ->filterCategory($inputs)
+                ->filterWord($inputs)
+                ->orderBy('created_at', 'desc')
+                ->paginate(10);
         }
-        if (!empty($inputs['search_word'])) {
-            $query->SerchWord($inputs);
-        }
-        return $query;
     }
 
     public function scopeFetchUserQuestion($query, $userId)
@@ -64,13 +57,19 @@ class Question extends Model
         return $query->where('user_id', $userId);
     }
 
-    public function scopeSerchCategory($query, $inputs)
+    public function scopeFilterCategory($query, $inputs)
     {
-        return $query->where('tag_category_id', $inputs);
+        if (!empty($inputs['tag_category_id'])) {
+            return $query->where('tag_category_id', $inputs);
+        }
+        return $query;
     }
 
-    public function scopeSerchWord($query, $inputs)
+    public function scopeFilterWord($query, $inputs)
     {
-        return $query->where('title', 'like', '%'.$inputs['search_word'].'%');
+        if (!empty($inputs['search_word'])) {
+            $query->where('title', 'like', '%'.$inputs['search_word'].'%');
+        }
+        return $query;
     }
 }
