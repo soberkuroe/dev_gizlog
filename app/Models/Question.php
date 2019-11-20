@@ -51,7 +51,6 @@ class Question extends Model
         if (!empty($inputs['tag_category_id'])) {
             return $query->where('tag_category_id', $inputs);
         }
-        return $query;
     }
 
     public function scopeFilterWord($query, $inputs)
@@ -59,6 +58,5 @@ class Question extends Model
         if (!empty($inputs['search_word'])) {
             return $query->where('title', 'like', '%'.$inputs['search_word'].'%');
         }
-        return $query;
     }
 }
