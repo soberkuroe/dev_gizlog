@@ -25,7 +25,7 @@ class QuestionController extends Controller
      * index画面の表示
      * requestがあった場合は検索を実行しLengthAwarePaginatorインスタンスを返す
      *
-     * @param \Illuminate\Foundation\Http\FormRequest $request
+     * @param SerchQuestionsRequest $request
      * @return \Illuminate\Http\Response
      */
     public function index(SerchQuestionsRequest $request)
@@ -53,7 +53,7 @@ class QuestionController extends Controller
      * questionsテーブルへ新規レコードの登録
      * 登録後indexへリダイレクト
      *
-     * @param  \Illuminate\Foundation\Http\FormRequest  $request
+     * @param  QuestionsRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(QuestionsRequest $request)
@@ -95,7 +95,7 @@ class QuestionController extends Controller
      * 指定のレコードを更新
      * 更新後indexへリダイレクト
      *
-     * @param  \Illuminate\Foundation\Http\FormRequest  $request
+     * @param  QuestionsRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -133,7 +133,7 @@ class QuestionController extends Controller
     /**
      * 新規投稿内容の確認画面へ遷移
      *
-     * @param  \Illuminate\Foundation\Http\FormRequest  $request
+     * @param  QuestionsRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function createConfirm(QuestionsRequest $request)
@@ -146,7 +146,7 @@ class QuestionController extends Controller
     /**
      * 更新投稿内容の確認画面へ遷移
      *
-     * @param  \Illuminate\Foundation\Http\FormRequest  $request
+     * @param  QuestionsRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function updateConfirm(QuestionsRequest $request, $sendQuestionId)
