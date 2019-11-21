@@ -24,7 +24,7 @@ class SerchQuestionsRequest extends FormRequest
     public function rules()
     {
         return [
-            'search_word' => 'max:10',
+            'search_word' => 'max:10|string',
         ];
     }
 

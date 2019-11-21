@@ -24,9 +24,9 @@ class QuestionsRequest extends FormRequest
     public function rules()
     {
         return [
-            'tag_category_id' => 'required|integer|between:1,4',
-            'title'           => 'required|max:30',
-            'content'         => 'required|max:1000'
+            'tag_category_id' => 'required|integer|exists:tag_categories,id',
+            'title'           => 'required|max:30|string',
+            'content'         => 'required|max:1000|string'
         ];
     }
 
