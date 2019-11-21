@@ -18,9 +18,10 @@ class CommentController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * commentsテーブルへ新規レコードの登録
+     * 登録後indexへリダイレクト
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  CommentRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(CommentRequest $request)

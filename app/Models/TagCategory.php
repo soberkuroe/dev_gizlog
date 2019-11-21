@@ -18,14 +18,21 @@ class TagCategory extends Model
         return $this->hasMany('App\Models\Question');
     }
 
-    public function fetchCategory($fetchID)
+    public function confirmCategory($id)
     {
-        return $this->where('id', $fetchID['tag_category_id'])->get();
+        return $this->find($id['tag_category_id']);
     }
 
     public function fetchAllCategories()
     {
         return $this->all()->pluck('name', 'id');
+    }
+
+    public function fetchFormCategories()
+    {
+        return $this->all()
+                    ->pluck('name', 'id')
+                    ->prepend('Select category', '');
     }
 }
 

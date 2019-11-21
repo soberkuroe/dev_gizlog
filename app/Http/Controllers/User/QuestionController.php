@@ -43,9 +43,7 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        $tagCategories = $this->tagCategory
-                              ->fetchAllCategories()
-                              ->prepend('Select category', '');
+        $tagCategories = $this->tagCategory->fetchFormCategories();
         return view('user.question.create', compact('tagCategories'));
     }
 
@@ -85,9 +83,7 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = $this->question->find($id);
-        $tagCategories = $this->tagCategory
-                              ->fetchAllCategories()
-                              ->prepend('Select category', '');
+        $tagCategories = $this->tagCategory->fetchFormCategories();
         return view('user.question.edit', compact('question', 'tagCategories'));
     }
 
@@ -138,9 +134,9 @@ class QuestionController extends Controller
      */
     public function createConfirm(QuestionsRequest $request)
     {
-        $question = $request->all();
-        $tagCategory = $this->tagCategory->fetchCategory($question);
-        return view('user.question.createconfirm', compact('question', 'tagCategory'));
+        $input = $request->all();
+        $tagCategory = $this->tagCategory->confirmCategory($input);
+        return view('user.question.createconfirm', compact('input', 'tagCategory'));
     }
 
     /**
@@ -149,10 +145,10 @@ class QuestionController extends Controller
      * @param  QuestionsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function updateConfirm(QuestionsRequest $request, $sendQuestionId)
+    public function updateConfirm(QuestionsRequest $request, $id)
     {   
-        $question = $request->all();
-        $tagCategory = $this->tagCategory->fetchCategory($question);
-        return view('user.question.updateconfirm', compact('question', 'tagCategory', 'sendQuestionId'));
+        $input = $request->all();
+        $tagCategory = $this->tagCategory->confirmCategory($input);
+        return view('user.question.updateconfirm', compact('input', 'tagCategory', 'id'));
     }
 }

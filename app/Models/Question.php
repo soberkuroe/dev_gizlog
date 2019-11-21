@@ -9,6 +9,8 @@ class Question extends Model
 {
     use SoftDeletes;
 
+    const PER_PAGE = 10;
+
     protected $fillable = [
         'user_id',
         'tag_category_id',
@@ -35,7 +37,7 @@ class Question extends Model
     {
         return $this->where('user_id', $userId)
                     ->orderBy('created_at', 'desc')
-                    ->paginate(10);
+                    ->paginate(self::PER_PAGE);
     }
 
     public function fetchQuestion($inputs)
@@ -43,7 +45,7 @@ class Question extends Model
         return $this->filterCategory($inputs)
                     ->filterWord($inputs)
                     ->orderBy('created_at', 'desc')
-                    ->paginate(10);
+                    ->paginate(self::PER_PAGE);
     }
 
     public function scopeFilterCategory($query, $inputs)

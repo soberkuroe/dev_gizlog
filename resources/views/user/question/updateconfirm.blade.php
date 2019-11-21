@@ -5,28 +5,28 @@
 <div class="main-wrap">
   <div class="panel panel-success">
     <div class="panel-heading">
-    {{ $tagCategory[0]->name }}&nbsp;&nbsp;の質問
+    {{ $tagCategory->name }}&nbsp;&nbsp;の質問
     </div>
     <div class="table-responsive">
       <table class="table table-striped table-bordered">
         <tbody>
           <tr>
             <th class="table-column">Title</th>
-            <td class="td-text">{{ $question['title'] }}</td>
+            <td class="td-text">{{ $input['title'] }}</td>
           </tr>
           <tr>
             <th class="table-column">Question</th>
-            <td class='td-text'>{{ $question['content'] }}</td>
+            <td class='td-text'>{{ $input['content'] }}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
   <div class="btn-bottom-wrapper">
-    {!! Form::open(['route' => ['question.update', $sendQuestionId], 'method' => 'PUT']) !!}
-      {!! Form::hidden('tag_category_id', $question['tag_category_id']) !!}
-      {!! Form::hidden('title', $question['title']) !!}
-      {!! Form::hidden('content', $question['content']) !!}
+    {!! Form::open(['route' => ['question.update', $id], 'method' => 'PUT']) !!}
+      {!! Form::hidden('tag_category_id', $input['tag_category_id']) !!}
+      {!! Form::hidden('title', $input['title']) !!}
+      {!! Form::hidden('content', $input['content']) !!}
       {!! Form::button('<i class="fa fa-check" aria-hidden="true"></i>', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
     {!! Form::close() !!}
   </div>
