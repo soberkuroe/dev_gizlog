@@ -14,6 +14,6 @@ class CommentsTableSeeder extends Seeder
     {
         DB::table('users')->truncate();
 
-        factory(App\Models\Comment::class, 100)->create();
+        factory(App\Models\Comment::class, 500)->create();
     }
 }

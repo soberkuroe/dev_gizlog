@@ -13,6 +13,6 @@ class QuestionsTableSeeder extends Seeder
     {
         DB::table('questions')->truncate();
 
-        factory(App\Models\Question::class, 100)->create();
+        factory(App\Models\Question::class, 200)->create();
     }
 }
