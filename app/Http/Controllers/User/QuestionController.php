@@ -30,9 +30,9 @@ class QuestionController extends Controller
      */
     public function index(SerchQuestionsRequest $request)
     {
-        $questions = $this->question->fetchQuestion($request->all());
-        $tagCategories = $this->tagCategory->fetchAllCategories();
-        return view('user.question.index', compact('questions', 'tagCategories'));
+        $questions = $this->question->fetchQuestions($request->all());
+        $tagCategoryNames = $this->tagCategory->fetchAllCategoryNames()->pluck('name', 'id');
+        return view('user.question.index', compact('questions', 'tagCategoryNames'));
     }
 
     /**
@@ -43,8 +43,11 @@ class QuestionController extends Controller
      */
     public function create()
     {
-        $tagCategories = $this->tagCategory->fetchFormCategories();
-        return view('user.question.create', compact('tagCategories'));
+        $formTagCategories = $this->tagCategory
+                                  ->fetchAllCategoryNames()
+                                  ->pluck('name', 'id')
+                                  ->prepend('Select category', '');
+        return view('user.question.create', compact('formTagCategories'));
     }
 
     /**
@@ -83,8 +86,11 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = $this->question->find($id);
-        $tagCategories = $this->tagCategory->fetchFormCategories();
-        return view('user.question.edit', compact('question', 'tagCategories'));
+        $formTagCategories = $this->tagCategory
+                                  ->fetchAllCategoryNames()
+                                  ->pluck('name', 'id')
+                                  ->prepend('Select category', '');
+        return view('user.question.edit', compact('question', 'formTagCategories'));
     }
 
     /**
@@ -122,7 +128,7 @@ class QuestionController extends Controller
      */
     public function showMypage()
     {
-        $questions = $this->question->fetchAuthUserQuestion(Auth::id());
+        $questions = $this->question->fetchUserQuestions(Auth::id());
         return view('user.question.mypage', compact('questions'));
     }
 
@@ -134,9 +140,8 @@ class QuestionController extends Controller
      */
     public function createConfirm(QuestionsRequest $request)
     {
-        $input = $request->all();
-        $tagCategory = $this->tagCategory->confirmCategory($input);
-        return view('user.question.createconfirm', compact('input', 'tagCategory'));
+        $tagCategoryName = $this->tagCategory->findCategoryName($request->get('tag_category_id'));
+        return view('user.question.createconfirm', compact('request', 'tagCategoryName'));
     }
 
     /**
@@ -147,8 +152,7 @@ class QuestionController extends Controller
      */
     public function updateConfirm(QuestionsRequest $request, $id)
     {   
-        $input = $request->all();
-        $tagCategory = $this->tagCategory->confirmCategory($input);
-        return view('user.question.updateconfirm', compact('input', 'tagCategory', 'id'));
+        $tagCategoryName = $this->tagCategory->findCategoryName($request->get('tag_category_id'));
+        return view('user.question.updateconfirm', compact('request', 'tagCategoryName', 'id'));
     }
 }
