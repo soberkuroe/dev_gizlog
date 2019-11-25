@@ -24,22 +24,17 @@ class QuestionsRequest extends FormRequest
     public function rules()
     {
         return [
-            'tag_category_id' => 'required|integer|exists:tag_categories,id',
-            'title'           => 'required|max:30|string',
-            'content'         => 'required|max:1000|string'
+            'tag_category_id' => ['required', 'integer', 'exists:tag_categories,id'],
+            'title'           => ['required', 'max:30', 'string'],
+            'content'         => ['required', 'max:1000', 'string']
         ];
-    }
-
-    public function messages()
-    {
-        return [];
     }
 
     protected function validationData()
     {
         $input = $this->all();
-        $input['title'] = mb_convert_kana($input['title'], 's');
-        $input['content'] = mb_convert_kana($input['content'], 's');
+        $input['title'] = !empty($input['title']) ? mb_convert_kana($input['title'], 's') : null;
+        $input['content'] = !empty($input['content']) ? mb_convert_kana($input['content'], 's') : null;
         return $input;
     }
 }

@@ -24,12 +24,7 @@ class SerchQuestionsRequest extends FormRequest
     public function rules()
     {
         return [
-            'search_word' => 'max:10|string',
+            'search_word' => ['max:10'],
         ];
-    }
-
-    public function messages()
-    {
-        return [];
     }
 }

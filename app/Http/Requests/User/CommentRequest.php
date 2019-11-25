@@ -24,19 +24,14 @@ class CommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => 'required|max:1000|string'
+            'comment' => ['required', 'max:1000', 'string']
         ];
-    }
-
-    public function messages()
-    {
-        return [];
     }
 
     protected function validationData()
     {
         $input = $this->all();
-        $input['comment'] = mb_convert_kana($input['comment'], 's');
+        $input['comment'] = !empty($input['comment']) ? mb_convert_kana($input['comment'], 's') : null;
         return $input;
     }
 }
