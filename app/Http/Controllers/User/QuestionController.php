@@ -8,7 +8,6 @@ use App\Models\TagCategory;
 use App\Http\Requests\User\SerchQuestionsRequest;
 use App\Http\Requests\User\QuestionsRequest;
 use Illuminate\Support\Facades\Auth;
-use Socialite;
 
 class QuestionController extends Controller
 {
@@ -31,8 +30,6 @@ class QuestionController extends Controller
      */
     public function index(SerchQuestionsRequest $request)
     {
-        // $test = Auth::user()->id;
-        // dd($test);
         $request->session()->flashinput($request->all());
         $questions = $this->question->fetchQuestions($request->all());
         $tagCategoryNames = $this->tagCategory->fetchAllCategoryNames()->pluck('name', 'id');
