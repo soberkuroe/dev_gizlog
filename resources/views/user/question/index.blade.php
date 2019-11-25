@@ -17,12 +17,10 @@
         <i class="fa fa-user" aria-hidden="true"></i>
       </a>
     </div>
-    {!! Form::close() !!}
-    {!! Form::open(['route' => 'question.index', 'method' => 'GET', 'class' => 'category-form']) !!}
     <div class="category-wrap">
       <div class="btn all" id="">all</div>
-      @foreach($tagCategories as $id => $category)
-      <div class="btn {{ $category }}" id="{{ $id }}">{{ $category }}</div>
+      @foreach($tagCategoryNames as $id => $tagCategoryName)
+      <div class="btn {{ $tagCategoryName }}" id="{{ $id }}">{{ $tagCategoryName }}</div>
       @endforeach
       {!! Form::hidden('tag_category_id', null, ['id' => 'category-val']) !!}
     </div>

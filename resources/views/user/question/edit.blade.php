@@ -6,20 +6,20 @@
 <div class="main-wrap">
   <div class="container">
     {!! Form::open(['route' => ['question.update.confirm', $question->id]]) !!}
-      <div class="form-group @if(!empty($errors->first('tag_category_id'))) has-error @endif">
+      <div class="form-group @if($errors->has('tag_category_id'))) has-error @endif">
         {!! Form::select('tag_category_id',
-          $tagCategories, $question->tag_category_id, ['class' => 'form-control selectpicker form-size-small', 'id' => 'pref_id']) !!}
+          $formTagCategories, $question->tag_category_id, ['class' => 'form-control selectpicker form-size-small', 'id' => 'pref_id']) !!}
         @if($errors->has('tag_category_id'))
         <span class="help-block">{{ $errors->first('tag_category_id') }}</span>
         @endif
       </div>
-      <div class="form-group @if(!empty($errors->first('title'))) has-error @endif">
+      <div class="form-group @if($errors->has('title')) has-error @endif">
         {!! Form::text('title', $question->title, ['class' => 'form-control', 'placeholder' => 'title']) !!}
         @if($errors->has('title'))
         <span class="help-block">{{ $errors->first('title') }}</span>
         @endif
       </div>
-      <div class="form-group @if(!empty($errors->first('content'))) has-error @endif">
+      <div class="form-group @if($errors->first('content')) has-error @endif">
         {!! Form::textarea('content', $question->content, ['class' => 'form-control',  'placeholder' => 'Please write down your question here...']) !!}
         @if($errors->has('content'))
         <span class="help-block">{{ $errors->first('content') }}</span>
