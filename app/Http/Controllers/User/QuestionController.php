@@ -30,6 +30,7 @@ class QuestionController extends Controller
      */
     public function index(SerchQuestionsRequest $request)
     {
+        $request->session()->flashinput($request->all());
         $questions = $this->question->fetchQuestions($request->all());
         $tagCategoryNames = $this->tagCategory->fetchAllCategoryNames()->pluck('name', 'id');
         return view('user.question.index', compact('questions', 'tagCategoryNames'));

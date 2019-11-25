@@ -33,17 +33,17 @@ class Question extends Model
         return $this->hasMany('App\Models\Comment');
     }
 
-    public function fetchAuthUserQuestion($userId)
+    public function fetchUserQuestion($userId)
     {
         return $this->where('user_id', $userId)
                     ->orderBy('created_at', 'desc')
                     ->paginate(self::PER_PAGE);
     }
 
-    public function fetchQuestion($inputs)
+    public function fetchQuestions($inputs)
     {
         return $this->filterCategory($inputs)
-                    ->filterWord($inputs)
+                    ->filtertitle($inputs)
                     ->orderBy('created_at', 'desc')
                     ->paginate(self::PER_PAGE);
     }
@@ -51,11 +51,11 @@ class Question extends Model
     public function scopeFilterCategory($query, $inputs)
     {
         if (!empty($inputs['tag_category_id'])) {
-            return $query->where('tag_category_id', $inputs);
+            return $query->where('tag_category_id', $inputs['tag_category_id']);
         }
     }
 
-    public function scopeFilterWord($query, $inputs)
+    public function scopeFilterTitle($query, $inputs)
     {
         if (!empty($inputs['search_word'])) {
             return $query->where('title', 'like', '%'.$inputs['search_word'].'%');
