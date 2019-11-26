@@ -5,8 +5,8 @@
 <div class="main-wrap">
   <div class="panel panel-success">
     <div class="panel-heading">
-      <img src="{{ Auth::user()->avatar }}" class="avatar-img">
-      <p>{{ Auth::user()->name }}&nbsp;さんの質問&nbsp;&nbsp;(&nbsp;&nbsp;{{ $question->tagCategory->name }}&nbsp;&nbsp;)&nbsp;&nbsp;{{ $question->created_at->format('Y-m-d H:i') }}</p>
+      <img src="{{ $question->user->avatar }}" class="avatar-img">
+      <p>{{ $question->user->name }}&nbsp;さんの質問&nbsp;&nbsp;(&nbsp;&nbsp;{{ $question->tagCategory->name }}&nbsp;&nbsp;)&nbsp;&nbsp;{{ $question->created_at->format('Y-m-d H:i') }}</p>
       <p class="question-date"></p>
     </div>
     <div class="table-responsive">
@@ -28,8 +28,8 @@
     <div class="comment-list">
         <div class="comment-wrap">
           <div class="comment-title">
-            <img src="{{ Auth::user()->avatar }}" class="avatar-img">
-            <p>{{ Auth::user()->name }}</p>
+            <img src="{{ $comment->user->name }}" class="avatar-img">
+            <p>{{ $comment->user->name }}</p>
             <p class="comment-date">{{ $comment->created_at }}</p>
           </div>
           <div class="comment-body">{{ $comment->comment }}</div>
@@ -41,7 +41,7 @@
       {!! Form::hidden('user_id', '') !!}
       {!! Form::hidden('question_id', $question->id) !!}
       <div class="comment-title">
-        <img src="{{ Auth::user()->avatar }}" class="avatar-img"><p>コメントを投稿する</p>
+        <img src="{{ $question->user->avatar }}" class="avatar-img"><p>コメントを投稿する</p>
       </div>
       <div class="comment-body">
         {!! Form::textarea('comment', null, ['class' => 'form-control', 'placeholder' => 'Add your comment...']) !!}

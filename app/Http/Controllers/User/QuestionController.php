@@ -45,9 +45,9 @@ class QuestionController extends Controller
     public function create()
     {
         $formTagCategories = $this->tagCategory
-                                  ->fetchAllCategoryNames()
-                                  ->pluck('name', 'id')
-                                  ->prepend('Select category', '');
+            ->fetchAllCategoryNames()
+            ->pluck('name', 'id')
+            ->prepend('Select category', '');
         return view('user.question.create', compact('formTagCategories'));
     }
 
@@ -74,7 +74,7 @@ class QuestionController extends Controller
      */
     public function show($id)
     {
-        $question = $this->question->find($id);
+        $question = $this->question->with('comments.user')->find($id);
         return view('user.question.show', compact('question'));
     }
 
@@ -88,9 +88,9 @@ class QuestionController extends Controller
     {
         $question = $this->question->find($id);
         $formTagCategories = $this->tagCategory
-                                  ->fetchAllCategoryNames()
-                                  ->pluck('name', 'id')
-                                  ->prepend('Select category', '');
+            ->fetchAllCategoryNames()
+            ->pluck('name', 'id')
+            ->prepend('Select category', '');
         return view('user.question.edit', compact('question', 'formTagCategories'));
     }
 

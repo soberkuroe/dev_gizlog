@@ -18,14 +18,14 @@ class Question extends Model
         'content'
     ];
 
-    protected $with =[
-        'comments',
-        'tagCategory'
-    ];
-
     public function tagCategory()
     {
         return $this->belongsTo('App\Models\TagCategory');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
     }
 
     public function comments()
@@ -33,9 +33,10 @@ class Question extends Model
         return $this->hasMany('App\Models\Comment');
     }
 
-    public function fetchUserQuestion($userId)
+    public function fetchUserQuestions($userId)
     {
         return $this->where('user_id', $userId)
+                    ->with(['comments', 'tagCategory'])
                     ->orderBy('created_at', 'desc')
                     ->paginate(self::PER_PAGE);
     }
@@ -44,6 +45,7 @@ class Question extends Model
     {
         return $this->filterCategory($inputs)
                     ->filtertitle($inputs)
+                    ->with(['comments', 'tagCategory', 'user'])
                     ->orderBy('created_at', 'desc')
                     ->paginate(self::PER_PAGE);
     }

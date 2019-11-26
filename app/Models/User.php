@@ -56,6 +56,17 @@ class User extends Authenticatable
         return $this->firstOrNew(['user_info_id' => $userInfoId]);
     }
 
+    public function comment()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
+    public function question()
+    {
+        return $this->hasMany('App\Models\Question');
+    }
+
+
     public function saveUserInfos($users, $slackUserInfos)
     {
         $users->fill([
